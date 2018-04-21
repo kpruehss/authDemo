@@ -20,6 +20,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -39,6 +40,25 @@ app.get('/secret', (req, res) => {
 // show sign up form
 app.get('/register', (req, res) => {
   res.render('register');
+});
+
+// Handle user signup
+app.post('/register', (req, res) => {
+  req.body.username;
+  req.body.password;
+  User.register(
+    new User({ username: req.body.username }),
+    req.body.password,
+    (err, user) => {
+      if (err) {
+        console.log(err);
+        return res.render('register');
+      }
+      passport.authenticate('local')(req, res, () => {
+        res.redirect('/secret');
+      });
+    }
+  );
 });
 
 app.listen(app.get('port'), () => {
