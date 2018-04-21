@@ -24,12 +24,21 @@ app.use(passport.session());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//========
+// ROUTES
+//========
 app.get('/', (req, res) => {
   res.render('home');
 });
 
 app.get('/secret', (req, res) => {
   res.render('secret');
+});
+
+// Auth Routes
+// show sign up form
+app.get('/register', (req, res) => {
+  res.render('register');
 });
 
 app.listen(app.get('port'), () => {
