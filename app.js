@@ -11,6 +11,18 @@ mongoose.connect('mongodb://localhost/auth_demo_app');
 const app = express();
 app.set('view engine', 'pug');
 app.set('port', process.env.PORT || 3000);
+app.use(
+  require('express-session')({
+    secret: 'arwen is a hooman',
+    resave: false,
+    saveUninitialized: false
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.get('/', (req, res) => {
   res.render('home');
