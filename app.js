@@ -1,5 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+const LocalStrategy = require('passport-local');
+const passportLocalMongoose = require('passport-local-mongoose');
+const User = require('./models/user');
 
 mongoose.connect('mongodb://localhost/auth_demo_app');
 
