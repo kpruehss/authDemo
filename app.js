@@ -79,6 +79,10 @@ app.post(
   (req, res) => {}
 );
 
+app.get('logout', (req, res) => {
+  res.send('Ok, Login you out....soon');
+});
+
 app.listen(app.get('port'), () => {
   console.log('Server started');
 });
