@@ -61,6 +61,23 @@ app.post('/register', (req, res) => {
   );
 });
 
+// LOGIN ROUTES
+// Render login form
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// login logic
+//middleware
+app.post(
+  '/login',
+  passport.authenticate('local', {
+    successRedirect: '/secret',
+    failureRedirect: '/login'
+  }),
+  (req, res) => {}
+);
+
 app.listen(app.get('port'), () => {
   console.log('Server started');
 });
